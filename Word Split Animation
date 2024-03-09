@@ -1,0 +1,45 @@
+<style>
+.word {display: inline-block;opacity: 0;transform: translateY(20px);transition: transform 0.8s, opacity 0.8s;}
+.animate-word {opacity: 1;transform: translateY(0);}
+</style>
+
+<script>
+$(document).ready(function(){
+    
+    // Text Animation
+  function wrapTextAndPreserveSpanClasses(element) {
+    $(element).contents().each(function() {
+      if (this.nodeType === 3) { // Text node
+        const words = this.nodeValue.split(' ').filter(word => word.trim() !== '').map(word => `<span class="word">${word}</span>`);
+        $(this).replaceWith(words.join(' '));
+      } else if (this.nodeType === 1 && this.tagName.toLowerCase() === 'span') { // Element node (span)
+        const spanClass = $(this).attr('class');
+        const words = $(this).text().split(' ').filter(word => word.trim() !== '').map((word, index) => index === 0 ? `<span class="word ${spanClass}">${word}</span>` : ` <span class="word ${spanClass}">${word}</span>`);
+        $(this).replaceWith(words.join(''));
+      }
+    });
+  }
+
+  $('h1, h2').each(function() {
+    wrapTextAndPreserveSpanClasses(this);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        $(entry.target).find('.word').each(function(i) {
+          setTimeout(() => {
+            $(this).addClass('animate-word');
+          }, 100 * i);
+        });
+      }
+    });
+  }, {
+    threshold: 0.3
+  });
+
+  $('h1, h2').each(function() {
+    observer.observe(this);
+  });
+ });
+</script>
