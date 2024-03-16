@@ -1,0 +1,29 @@
+<style>
+/*video-bg-image: is the gradiant within the main box*/
+	.video-box .video-bg-image {
+    animation-duration: 4.1s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+    animation-name: gLqvyd;
+    animation-timeline: auto;
+    animation-range: normal;
+    animation-delay: calc(0s + 600ms);
+}
+
+ @keyframes gLqvyd{
+   	0% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.74, 0.25, 0.76, 1);
+}
+10% {
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.12, 0.01, 0.08, 0.99);
+}
+100% {
+    opacity: 0.2;
+}
+   }
+</style>
